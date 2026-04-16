@@ -15,7 +15,7 @@ class SettingDialog : public QDialog
 public:
     explicit SettingDialog(QWidget *parent = nullptr);
     ~SettingDialog();
-    void initialize(int x,int y,int r);
+    void initialize(int x,int y,int r,QColor color,Qt::BrushStyle fillStyle,int w);
 
 signals:
     void sendData(int x,int y,int r,QColor color,Qt::BrushStyle fillStyle,int w);

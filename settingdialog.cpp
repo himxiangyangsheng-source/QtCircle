@@ -7,10 +7,10 @@ SettingDialog::SettingDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->combofill->addItem("无填充",static_cast<int>(Qt::NoBrush));
     ui->combofill->addItem("实心",static_cast<int>(Qt::SolidPattern));
     ui->combofill->addItem("水平线",static_cast<int>(Qt::HorPattern));
     ui->combofill->addItem("交叉网络",static_cast<int>(Qt::CrossPattern));
+    ui->combofill->addItem("无填充",static_cast<int>(Qt::NoBrush));
 //Qt::NoBrush Qt::SolidPattern Qt::HorPattern Qt::CrossPattern
 
 
@@ -20,6 +20,7 @@ SettingDialog::SettingDialog(QWidget *parent) :
         QColor  temp=QColorDialog::getColor(m_color,this,"请选择颜色");
         m_color=temp;
     });
+
     connect(ui->btnOk,&QPushButton::clicked,this,[this]
     {
         int x=ui->EditX->text().toInt();
@@ -36,9 +37,13 @@ SettingDialog::~SettingDialog()
 {
     delete ui;
 }
-void SettingDialog::initialize(int x,int y,int r)
+
+void SettingDialog::initialize(int x,int y,int r,QColor c,Qt::BrushStyle bs,int w)
 {
     ui->EditX->setText(QString::number(x));
     ui->EditY->setText(QString::number(y));
     ui->EditR->setText(QString::number(r));
+    m_color = c;
+    ui->combofill->setCurrentIndex(ui->combofill->findData(static_cast<int>(bs)));
+    ui->spinWidth->setValue(w);
 }
